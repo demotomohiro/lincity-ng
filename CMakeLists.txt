@@ -7,27 +7,8 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/sdl2)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
-  message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
-  file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
-                "${CMAKE_BINARY_DIR}/conan.cmake"
-                TLS_VERIFY ON)
-endif()
-
-include(${CMAKE_BINARY_DIR}/conan.cmake)
-
-conan_add_remote(NAME bincrafters
-                 INDEX 1
-                 URL https://api.bintray.com/conan/bincrafters/public-conan
-                 VERIFY_SSL True)
-
-conan_cmake_run(CONANFILE conanfile.txt
-    BASIC_SETUP CMAKE_TARGETS
-    BUILD missing
-)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_gfx REQUIRED)
@@ -218,9 +199,9 @@ target_link_libraries(lincity-ng PRIVATE
   SDL2::Image
   SDL2::Mixer
   SDL2::TTF
-  CONAN_PKG::libxml2
-  CONAN_PKG::physfs
-  CONAN_PKG::zlib
+  LibXml2::LibXml2
+  ${PHYSFS_LIBRARY}
+  ZLIB::ZLIB
 )
 if (APPLE)
   target_link_libraries(lincity-ng PRIVATE "-framework OpenGL")
