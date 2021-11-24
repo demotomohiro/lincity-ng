@@ -18,6 +18,7 @@ find_package(SDL2_ttf REQUIRED)
 find_package(LibXml2 REQUIRED)
 find_package(PhysFS REQUIRED)
 find_package(ZLIB REQUIRED)
+find_package(OpenGL REQUIRED)
 
 configure_file(config.h.in config.h @ONLY)
 
@@ -208,6 +209,7 @@ target_link_libraries(lincity-ng PRIVATE
   LibXml2::LibXml2
   ${PHYSFS_LIBRARY}
   ZLIB::ZLIB
+  OpenGL::GL
 )
 if (APPLE)
   target_link_libraries(lincity-ng PRIVATE "-framework OpenGL")
