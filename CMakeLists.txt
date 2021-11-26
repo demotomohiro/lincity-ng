@@ -163,7 +163,7 @@ add_executable(lincity-ng
   src/lincity-ng/Game.cpp
   src/lincity-ng/Config.cpp
   src/lincity-ng/MainLincity.cpp
-  src/lincity-ng/Debug.cpp
+  $<$<CONFIG:Debug>:src/lincity-ng/Debug.cpp>
   src/lincity-ng/readdir.cpp
   src/lincity-ng/getBundleSharePath.cpp
   src/lincity-ng/MiniMap.cpp
